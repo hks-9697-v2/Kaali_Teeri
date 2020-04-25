@@ -66,7 +66,7 @@ def create_deck(number_of_decks, number_of_players):
 
 	number_of_removed_cards = (number_of_decks*52)%(number_of_players)
 
-	suits = ['spades', 'diamonds', 'clubs', 'hearts']
+	suits = ['spades', 'diams', 'clubs', 'hearts']
 
 	values = ['A', '2', '3','4','5','6','7','8','9','10', 'J', 'Q', 'K']
 

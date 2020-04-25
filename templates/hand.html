@@ -1,5 +1,65 @@
-<ol>
+<link rel="stylesheet" type="text/css" href='{{ url_for("static", filename="cards.css") }}'>
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" type="text/css" href="cards-ie.css" media="screen" />
+    <![endif]-->
+    <!--[if IE 9]>
+        <link rel="stylesheet" type="text/css" href="cards-ie9.css" media="screen" />
+    <![endif]-->
+    <!-- the following js and css is not part of the CSS cards, but only for this example page -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript"><!--
+    $(document).ready(function(){
+        $('.options').addClass('active');
+        $('.toggle li').click(function(){
+            $('.playingCards').toggleClass($(this).text());
+        });
+        $('.lang li').click(function(){
+            $('html').attr('lang', $(this).text());
+            $('html').attr('xml:lang', $(this).text());
+        });
+    });
+    //--></script>
+    <style type="text/css">
+        .options.active {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            background: #ddd;
+            padding: .5em;
+        }
+        .options.active h3 {
+            font-size: 1.2em;
+        }
+        .options.active ul {
+            padding: 0;
+        }
+        .options.active li {
+            color: #00c;
+            text-decoration: underline;
+            margin-left: 1.5em;
+            cursor: pointer;
+        }
+        .options.active li:hover {
+            text-decoration: none;
+        }
+        div.clear {
+            clear: both;
+            height: 0;
+            line-height: 0;
+            font-size: 1px;
+            visibility: hidden;
+        }
+    </style>
+<div class="column is-4 is-offset-4">
+<div class="playingCards faceImages rotateHand">
+<ul class="hand">
   	{%for i in cards%}
-  		<li>{{i}}</li>
+  		<li><a class="card rank-{{i[1]}} {{i[0]}}" href="#">
+  			<span class="rank">{{i[1]}}</span>
+  			<span class="suit">&{{i[0]}};</span>
+  		</a>
+  	</li>
   	{%endfor%}
-  </ol>
+ </ul>
+</div>
+</div>

@@ -16,7 +16,8 @@ def get_hand():
 	cards = []
 	for hand_card_id in hand_card_ids:
 		card = Card.query.filter_by(id=hand_card_id.card).first()
-		cards.append(card.suit + " + " + card.value)
+		cards.append((card.suit,card.value))
+	cards = sorted(cards)
 	return cards
 
 @game.route('/bid')
@@ -80,7 +81,7 @@ def choose_trump_and_partner():
 	player = Player.query.filter_by(email=current_user.email).first()
 	number_of_players = len(Player.query.all())
 	number_of_partners = int(number_of_players/2)
-	suits = ['spades', 'diamonds', 'clubs', 'hearts']
+	suits = ['spades', 'diams', 'clubs', 'hearts']
 	values = ['A', '2', '3','4','5','6','7','8','9','10', 'J', 'Q', 'K']
 	turn = [1] if number_of_players <= 4 else [1,2]
 	to_choose = False
@@ -115,7 +116,9 @@ def check_selection():
 @game.route('/round/<int:round_id>')
 @login_required
 def round(round_id):
-	return render_template('profile.html', name=round_id)
+	cards = get_hand()
+	print(cards)
+	return render_template('round.html', name=round_id, cards=cards)
 
 # Partner and Sur Choose => Bid winner, display to all
 
