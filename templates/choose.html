@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<div class="column is-4 is-offset-4">
+	{%if to_choose==True%}	
+    <h3 class="title">Trump</h3>
+    <div class="box">
+    	<div id="app"></div>
+        <form method="POST" action="/trump_and_partner">
+            <div class="field">
+                <div class="control">
+                	<label for="Trump">Choose a Trump Suit:</label>
+                    <select id="trump">
+                    	{% for suit in suits %}
+                    		<option value="{{suit}}">{{suit}}</option>
+                    	{%endfor%}
+                    </select>
+                </div>
+            </div>
+            {%for i in range(1,2+1) %}
+            <div class="field">
+                <div class="control">
+                	<label for="Partner {{i}}">Choose Partner {{i}}:</label>
+                    <select id="partner_suit{{i}}">
+                    	{% for suit in suits %}
+                    		<option value="{{suit}}">{{suit}}</option>
+                    	{%endfor%}
+                    </select>
+                    <select id="partner_value{{i}}">
+                    	{% for value in values %}
+                    		<option value="{{value}}">{{value}}</option>
+                    	{%endfor%}
+                    </select>
+                </div>
+            </div>
+            {%endfor%}
+            <button class="button is-block is-info is-fullwidth" id="Select">Make Selection</button>
+        </form>
+    </div>
+    {%endif%}
+    {% include "hand.html"%}
+    </div>	
+
+{% include "hand.html"%}
+
+{% endblock %}

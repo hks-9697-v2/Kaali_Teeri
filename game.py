@@ -69,13 +69,31 @@ def check_bidding_completed():
 			return str(False)
 
 
+@game.route('/trump_and_partner')
+@login_required
+def choose_trump_and_partner():
+	game = db.session.query(Game).order_by(Game.id.desc()).first()
+	bidder_id = game.bidder
+	player = Player.query.filter_by(email=current_user.email).first()
+	number_of_players = len(Player.query.all())
+	number_of_partners = int(number_of_players/2)
+	suits = ['spades', 'diamonds', 'clubs', 'hearts']
+	values = ['A', '2', '3','4','5','6','7','8','9','10', 'J', 'Q', 'K']
+
+	to_choose = False
+	if bidder_id == player.id:
+		to_choose = True
+	return render_template('/choose.html', to_choose=to_choose, suits=suits, values=values, number_of_partners=number_of_partners)
+
+@game.route('/trump_and_partner', methods=['POST'])
+@login_required
+def post_choose_trump_and_partner():
+	game = db.session.query(Game).order_by(Game.id.desc()).first()
+
 @game.route('/round/<int:round_id>')
 @login_required
 def round(round_id):
 	return render_template('profile.html', name=round_id)
-# 	TODO: Remove mod number of 2s
-
-# Bidding => Round robin default winner
 
 # Partner and Sur Choose => Bid winner, display to all
 
