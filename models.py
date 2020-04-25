@@ -29,9 +29,11 @@ class Game(db.Model):
 
 class Partner(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	player_id = db.Column(db.Integer, nullable=False)
+	player_id = db.Column(db.Integer)
 	game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)	
-	card_id = db.Column(db.Integer, db.ForeignKey('card.id'), nullable=False)
+	suit = db.Column(db.String(100))
+	value = db.Column(db.String(100))
+	turn_number = db.Column(db.Integer)
 
 class Round(db.Model):
 	id = db.Column(db.Integer, primary_key=True)

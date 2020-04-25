@@ -18,7 +18,7 @@
                     </select>
                 </div>
             </div>
-            {%for i in range(1,2+1) %}
+            {%for i in range(1, number_of_partners+1) %}
             <div class="field">
                 <div class="control">
                 	<label for="Partner {{i}}">Choose Partner {{i}}:</label>
@@ -32,6 +32,12 @@
                     		<option value="{{value}}">{{value}}</option>
                     	{%endfor%}
                     </select>
+                    <label for="Partner {{i}}">Select 1st or 2nd Turn</label>
+                    <select id="partner_turn{{i}}">
+                    	{% for t in turn %}
+                    		<option value="{{t}}">{{t}}</option>
+                    	{%endfor%}
+                    </select>
                 </div>
             </div>
             {%endfor%}
@@ -40,8 +46,22 @@
     </div>
     {%endif%}
     {% include "hand.html"%}
-    </div>	
+    </div>
 
-{% include "hand.html"%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function check_selection(){
+  $.ajax({
+    url: '/check_selection',
+    success:  function(data) {
+      console.log(data);
+      if (data=="True")
+        window.location.href = "/round/1";
+        },
+      timeout: 5000 //If timeout is reached run again
+  });
+}
+setInterval(check_selection, 5000);
+</script>
 
 {% endblock %}

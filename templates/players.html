@@ -11,7 +11,7 @@
   	{%endfor%}
   </ol>
   {%if present == False%}
-  	<button><a href="{{ url_for('players.add_player')}}">Add me</a></button>
+  	<a href="{{ url_for('players.add_player')}}"><button>Add me</button></a>
   {%endif%}
   {%if present == True%}
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -32,7 +32,7 @@
 	}
 	setInterval(start_game, 5000);
 	</script>
-  	<button><a href="{{ url_for('players.start_game')}}">Start Game</a></button>
+  	<a href="{{ url_for('players.start_game')}}"><button>Start Game</button></a>
   {%endif%}
 </h2>
 {% endblock %}
