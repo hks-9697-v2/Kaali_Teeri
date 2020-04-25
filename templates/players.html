@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Players in the lobby
+</h1>
+<h2 class="subtitle">
+  <ol>
+  	{%for i in players%}
+  		<li>{{i.email}}</li>
+  	{%endfor%}
+  </ol>
+  {%if present == False%}
+  	<button><a href="{{ url_for('players.add_player')}}">Add me</a></button>
+  {%endif%}
+  {%if present == True%}
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script type="text/javascript">
+  	function start_game()
+  	{
+		$.ajax({
+	        url: '/game_query',
+	        success:  function(data) {
+	        	console.log(data);
+	            if (data=="True")
+	            	window.location.href = "/bid";
+	            else
+	            	window.location.href = "/players";
+	        },
+	        timeout: 5000 //If timeout is reached run again
+	    });
+	}
+	setInterval(start_game, 5000);
+	</script>
+  	<button><a href="{{ url_for('players.start_game')}}">Start Game</a></button>
+  {%endif%}
+</h2>
+{% endblock %}

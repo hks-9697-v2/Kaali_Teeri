@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="column is-4 is-offset-4">
+	{%if already_bid==False%}	
+    <h3 class="title">Bid</h3>
+    <div class="box">
+    	<div id="app"></div>
+        <form method="POST" action="/bid">
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="text" name="bid" id="bid" placeholder="Your Bid" autofocus="">
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-fullwidth" id="sendBid">Place Bid</button>
+        </form>
+    </div>
+    {%endif%}
+    {% include "hand.html"%}
+
+	</div>
+
+<script src='{{ url_for("static", filename="counter.js") }}'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href='{{ url_for("static", filename="counter.css") }}'>
+<script type="text/javascript">
+	function check_bidding(){
+  $.ajax({
+    url: '/bidding_completed',
+    success:  function(data) {
+      console.log(data);
+      if (data=="True")
+        window.location.href = "/round/1";
+        },
+      timeout: 5000 //If timeout is reached run again
+  });
+}
+setInterval(check_bidding, 5000);
+</script>
+{% endblock %}
