@@ -47,7 +47,7 @@ class Hand(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	player_id = db.Column(db.Integer, nullable=False)
 	game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
-	cards = db.relationship('Hand_Card', backref='hand', lazy=True)
+	cards = db.relationship('Hand_Card', backref='hand', lazy=True, cascade="all, delete-orphan")
 
 class Round_Card(db.Model):
 	id = db.Column(db.Integer, primary_key=True)

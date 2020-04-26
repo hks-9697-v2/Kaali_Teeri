@@ -10,8 +10,8 @@
         <form method="POST" action="/trump_and_partner">
             <div class="field">
                 <div class="control">
-                	<label for="Trump">Choose a Trump Suit:</label>
-                    <select id="trump">
+                	<label for="trump">Choose a Trump Suit:</label>
+                    <select name="trump">
                     	{% for suit in suits %}
                     		<option value="{{suit}}">{{suit}}</option>
                     	{%endfor%}
@@ -21,19 +21,18 @@
             {%for i in range(1, number_of_partners+1) %}
             <div class="field">
                 <div class="control">
-                	<label for="Partner {{i}}">Choose Partner {{i}}:</label>
-                    <select id="partner_suit{{i}}">
+                	<label for="partner_suit{{i}}">Choose Partner {{i}}:</label>
+                    <select name="partner_suit{{i}}">
                     	{% for suit in suits %}
                     		<option value="{{suit}}">{{suit}}</option>
                     	{%endfor%}
                     </select>
-                    <select id="partner_value{{i}}">
+                    <select name="partner_value{{i}}">
                     	{% for value in values %}
                     		<option value="{{value}}">{{value}}</option>
                     	{%endfor%}
                     </select>
-                    <label for="Partner {{i}}">Select 1st or 2nd Turn</label>
-                    <select id="partner_turn{{i}}">
+                    <select name="partner_turn{{i}}">
                     	{% for t in turn %}
                     		<option value="{{t}}">{{t}}</option>
                     	{%endfor%}

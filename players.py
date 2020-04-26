@@ -53,11 +53,11 @@ def start_game():
 @login_required
 def end_game():
 	global game_started
-	print(game_started)
-	if game_started==True:
-		game_started = False
-		db.session.query(Player).delete()
-		db.session.commit()
+	game_started = False
+	db.session.query(Player).delete()
+	db.session.commit()
+	print(len(Player.query.all()))
+
 	return redirect(url_for('players.list_players'))
 
 def create_deck(number_of_decks, number_of_players):
@@ -113,5 +113,5 @@ def distribute_cards():
 		for j in range(number_of_cards_in_hand):
 			hand_card = Hand_Card(card=cards[i*number_of_cards_in_hand+j].id, hand_id=new_hand.id)
 			db.session.add(hand_card)
-		db.session.commit()
+			db.session.commit()
 	
