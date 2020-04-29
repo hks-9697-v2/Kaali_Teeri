@@ -33,10 +33,7 @@ def create_app():
         from .main import main as main_blueprint
         app.register_blueprint(main_blueprint)
 
-        from .players import players as players_blueprint
-        app.register_blueprint(players_blueprint)
-
-        from .game import game as game_blueprint
+        from .game import app_game as game_blueprint
         app.register_blueprint(game_blueprint)
 
     return app

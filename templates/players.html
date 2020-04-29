@@ -7,11 +7,11 @@
 <h2 class="subtitle">
   <ol>
   	{%for i in players%}
-  		<li>{{i.email}}</li>
+  		<li>{{i}}</li>
   	{%endfor%}
   </ol>
   {%if present == False%}
-  	<a href="{{ url_for('players.add_player')}}"><button>Add me</button></a>
+  	<a href="{{ url_for('app_game.add_player')}}"><button>Add me</button></a>
   {%endif%}
   {%if present == True%}
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -32,7 +32,7 @@
 	}
 	setInterval(start_game, 5000);
 	</script>
-  	<a href="{{ url_for('players.start_game')}}"><button>Start Game</button></a>
+  	<a href="{{ url_for('app_game.start_game')}}"><button>Start Game</button></a>
   {%endif%}
 </h2>
 {% endblock %}

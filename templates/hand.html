@@ -57,10 +57,10 @@
 <div class="column is-4 is-offset-4">
 <div class="playingCards faceImages rotateHand">
 <ul class="{{activityClass}} hand">
-  	{%for i in cards%}
-  		<li><a class="card rank-{{i[1]}} {{i[0]}}" href="/make_move/{{i[0]}}/{{i[1]}}/{{round_number}}">
-  			<span class="rank">{{i[1]}}</span>
-  			<span class="suit">&{{i[0]}};</span>
+  	{%for card in cards%}
+  		<li><a class="card rank-{{card.value}} {{card.suit}}" href="/make_move/{{card.suit}}/{{card.value}}/{{round_id}}">
+  			<span class="rank">{{card.value}}</span>
+  			<span class="suit">&{{card.suit}};</span>
   		</a>
   	</li>
   	{%endfor%}

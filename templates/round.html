@@ -7,10 +7,10 @@
 
 <div class="playingCards faceImages rotateHand">
 <ul class="table">
-  	{%for i in table_cards%}
-  		<li><div class="card rank-{{i[1]}} {{i[0]}}" href="">
-  			<span class="rank">{{i[1]}}</span>
-  			<span class="suit">&{{i[0]}};</span>
+  	{%for card in table_cards%}
+  		<li><div class="card rank-{{card.value}} {{card.suit}}" href="">
+  			<span class="rank">{{card.value}}</span>
+  			<span class="suit">&{{card.suit}};</span>
   		</div>
   	</li>
   	{%endfor%}
@@ -40,11 +40,11 @@
 <script type="text/javascript">
 	function check_next_turn(){
   $.ajax({
-    url: '/next_turn/{{turn_id}}',
+    url: '/next_turn/{{turn_id}}/{{round_id}}',
     success:  function(data) {
       console.log(data);
       if (data=="True")
-        window.location.href = "/round/{{round_number}}";
+        window.location.href = "/round/{{round_id}}";
         },
       timeout: 5000 //If timeout is reached run again
   });
