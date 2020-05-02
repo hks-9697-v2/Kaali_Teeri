@@ -54,11 +54,13 @@
         cursor: default;
         } 
     </style>
-<div class="column is-4 is-offset-4">
-<div class="playingCards faceImages rotateHand">
+<div style="padding-left: 30px;width: 100%;overflow: scroll;">
+Hand:   
+
+<div class="playingCards faceImages">
 <ul class="{{activityClass}} hand">
   	{%for card in cards%}
-  		<li><a class="card rank-{{card.value}} {{card.suit}}" href="/make_move/{{card.suit}}/{{card.value}}/{{round_id}}">
+  		<li><a class="card {{card.suit}}" href="/make_move/{{card.suit}}/{{card.value}}/{{round_id}}">
   			<span class="rank">{{card.value}}</span>
   			<span class="suit">&{{card.suit}};</span>
   		</a>
