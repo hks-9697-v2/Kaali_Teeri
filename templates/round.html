@@ -8,6 +8,11 @@
 
     <span>;</span>
 
+    <span>Bid_winner:</span>
+    <span>{{bid_winner}};</span>
+
+    <span>;</span>
+
     <span>Partners:</span>
     {%for i in partner_cards%}
 
@@ -26,8 +31,13 @@
 
 <span style="padding-left: 30px;">Player Order:</span>
 {%for player in player_order%}
-
+{%if player_order[turn_id] == player%}
+<b>
+{%endif%}
 <span>{{player}}</span>
+{%if player_order[turn_id] == player%}
+</b>
+{%endif%}
 <span>,</span>
 
 {%endfor%}
@@ -35,7 +45,7 @@
     Table:
     <div style="display: table-cell;">
         <div class="playingCards faceImages">
-            <ul class="table">
+            <ul class="hand">
                 {%for card in table_cards%}
                 <li>
                     <div class="card {{card.suit}}" href="">
@@ -67,16 +77,14 @@
         margin-right: 20px;
     }
 </style>
-
+{%if past_rounds|length > 0%}
 <div class="flex-container" style="overflow: scroll;padding-left: 30px;">
-    Past {{past_rounds|length}} Rounds:</br>
+    Last Round:</br>
 
-
-    {%for past_round in past_rounds%}
     <div class="flex-child" >
         <div class="playingCards faceImages rotateHand" style="width: 100px;">
             <ul class="hand">
-                {%for card in past_round%}
+                {%for card in past_rounds[0]%}
                 <li><span class="card {{card.suit}}" href="/make_move/{{card.suit}}/{{card.value}}/{{round_id}}">
                         <span class="rank">{{card.value}}</span>
                         <span class="suit">&{{card.suit}};</span>
@@ -86,8 +94,9 @@
             </ul>
         </div>
     </div>
-    {% endfor %}
+
 </div>
+{%endif%}
 
 </br>
 
